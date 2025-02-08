@@ -1,5 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react'
 
+/**
+ * HomePage Component
+ * 
+ * Main landing page component that handles audio recording and file upload functionality.
+ * Provides interface for users to either record audio directly or upload an audio file.
+ * 
+ * @component
+ * @param {Object} props
+ * @param {Function} props.setAudioStream - Function to set the recorded audio stream
+ * @param {Function} props.setFile - Function to set the uploaded audio file
+ * @returns {JSX.Element} Home page with recording and upload controls
+ */
 export default function HomePage(props) {
     const { setAudioStream, setFile } = props
 
@@ -8,9 +20,13 @@ export default function HomePage(props) {
     const [duration, setDuration] = useState(0)
 
     const mediaRecorder = useRef(null)
-
     const mimeType = 'audio/webm'
 
+    /**
+     * Initiates audio recording using the browser's MediaRecorder API
+     * Requests microphone access and starts recording audio chunks
+     * @async
+     */
     async function startRecording() {
         let tempStream
         console.log('Start recording')
@@ -41,6 +57,11 @@ export default function HomePage(props) {
         setAudioChunks(localAudioChunks)
     }
 
+    /**
+     * Stops the current audio recording
+     * Creates a blob from recorded chunks and sets it as the audio stream
+     * @async
+     */
     async function stopRecording() {
         setRecordingStatus('inactive')
         console.log('Stop recording')
@@ -54,6 +75,10 @@ export default function HomePage(props) {
         }
     }
 
+    /**
+     * Effect hook to track recording duration
+     * Updates duration counter every second while recording is active
+     */
     useEffect(() => {
         if (recordingStatus === 'inactive') { return }
 

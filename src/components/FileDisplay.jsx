@@ -1,5 +1,28 @@
 import React, { useRef, useEffect } from 'react'
 
+/**
+ * FileDisplay Component
+ * 
+ * A React component that displays and manages audio file playback. It can handle both
+ * uploaded audio files and audio streams, providing a player interface with controls.
+ * 
+ * @component
+ * @param {Object} props
+ * @param {Function} props.handleAudioReset - Callback function to reset the audio state
+ * @param {File} [props.file] - The audio file to be played (optional)
+ * @param {MediaStream} [props.audioStream] - Audio stream to be played (optional)
+ * @param {Function} props.handleFormSubmission - Callback function for the transcribe action
+ * 
+ * @returns {JSX.Element} A main section containing the audio player and control buttons
+ * 
+ * @example
+ * <FileDisplay
+ *   handleAudioReset={() => {}}
+ *   file={audioFile}
+ *   audioStream={stream}
+ *   handleFormSubmission={onTranscribe}
+ * />
+ */
 export default function FileDisplay(props) {
     const { handleAudioReset, file, audioStream, handleFormSubmission } = props
     const audioRef = useRef()

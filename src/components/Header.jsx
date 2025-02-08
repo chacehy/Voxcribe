@@ -1,5 +1,14 @@
 import React from 'react'
 
+/**
+ * Header Component
+ * 
+ * Renders the application header with the VoxCribe logo, GitHub link, and a New button.
+ * The header is fixed at the top of the application and provides navigation controls.
+ * 
+ * @component
+ * @returns {JSX.Element} Header with navigation links and branding
+ */
 export default function Header() {
     return (
         <header className='flex items-center justify-between gap-4 p-4'>

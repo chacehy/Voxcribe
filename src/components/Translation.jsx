@@ -1,6 +1,21 @@
 import React from 'react'
 import { LANGUAGES } from '../utils/presets'
 
+/**
+ * Translation Component
+ * 
+ * Handles the translation interface and display of translated text.
+ * Provides language selection and translation controls.
+ * 
+ * @component
+ * @param {Object} props
+ * @param {string} props.textElement - The text to display (original or translated)
+ * @param {string} props.toLanguage - Currently selected target language
+ * @param {boolean} props.translating - Whether translation is in progress
+ * @param {Function} props.setToLanguage - Function to update the target language
+ * @param {Function} props.generateTranslation - Function to trigger translation
+ * @returns {JSX.Element} Translation interface with language selection and results
+ */
 export default function Translation(props) {
     const { textElement, toLanguage, translating, setToLanguage, generateTranslation } = props
     return (

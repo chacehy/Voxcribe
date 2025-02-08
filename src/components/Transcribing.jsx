@@ -1,5 +1,16 @@
 import React from 'react'
 
+/**
+ * Transcribing Component
+ * 
+ * Displays a loading animation and status message while audio is being transcribed.
+ * Shows different messages based on whether the model is downloading or processing.
+ * 
+ * @component
+ * @param {Object} props
+ * @param {boolean} props.downloading - Whether the model is currently being downloaded
+ * @returns {JSX.Element} Loading animation with status message
+ */
 export default function Transcribing(props) {
     const { downloading } = props
 

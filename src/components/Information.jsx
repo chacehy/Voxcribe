@@ -2,6 +2,18 @@ import React, { useState, useEffect, useRef } from 'react'
 import Transcription from './Transcription'
 import Translation from './Translation'
 
+/**
+ * Information Component
+ * 
+ * Displays transcription and translation results with options to switch between views,
+ * copy content, and download results. Manages the translation worker and UI state.
+ * 
+ * @component
+ * @param {Object} props
+ * @param {Array} props.output - Array of transcription results
+ * @param {boolean} props.finished - Whether the transcription process is complete
+ * @returns {JSX.Element} Information display with transcription/translation tabs and controls
+ */
 export default function Information(props) {
     const { output, finished } = props
     const [tab, setTab] = useState('transcription')
@@ -12,6 +24,10 @@ export default function Information(props) {
 
     const worker = useRef()
 
+    /**
+     * Effect hook to set up and manage the translation worker
+     * Handles worker messages for translation progress and results
+     */
     useEffect(() => {
         if (!worker.current) {
             worker.current = new Worker(new URL('../utils/translate.worker.js', import.meta.url), {
@@ -45,10 +61,16 @@ export default function Information(props) {
 
     const textElement = tab === 'transcription' ? output.map(val => val.text) : translation || ''
 
+    /**
+     * Copies the current text content to clipboard
+     */
     function handleCopy() {
         navigator.clipboard.writeText(textElement)
     }
 
+    /**
+     * Downloads the current text content as a .txt file
+     */
     function handleDownload() {
         const element = document.createElement("a")
         const file = new Blob([textElement], { type: 'text/plain' })
@@ -58,6 +80,10 @@ export default function Information(props) {
         element.click()
     }
 
+    /**
+     * Initiates the translation process using the worker
+     * Only proceeds if a target language is selected and not currently translating
+     */
     function generateTranslation() {
         if (translating || toLanguage === 'Select language') {
             return
@@ -71,9 +97,6 @@ export default function Information(props) {
             tgt_lang: toLanguage
         })
     }
-
-
-
 
     return (
         <main className='flex-1  p-4 flex flex-col gap-3 text-center sm:gap-4 justify-center pb-20 max-w-prose w-full mx-auto'>
